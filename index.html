@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sacred Reference | Mudras · Mantras · Stotrams — Aesthetics of Society</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#c9a84c;--gold2:#e8c97a;--dark:#0d0d0d;--panel:#111111;
+  --card:#161616;--border:#2a2a2a;--text:#d4c9b0;--muted:#7a7065;
+  --teal:#1d9e75;--red:#c84820;--blue:#1a5c8a;--purple:#6b3fa0;
+  --serif:'Georgia','Times New Roman',serif;--sans:'Segoe UI',system-ui,sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--text);font-family:var(--sans);font-size:15px;line-height:1.7;min-height:100vh}
+
+/* ── NAV ── */
+nav{position:sticky;top:0;z-index:1000;background:#080808;border-bottom:1px solid var(--border);padding:0 2rem;display:flex;align-items:center;gap:1.5rem;height:56px}
+.nav-logo{font-family:var(--serif);font-size:13px;color:var(--gold);letter-spacing:.08em;text-decoration:none;white-space:nowrap}
+.nav-links{display:flex;gap:0;list-style:none;overflow-x:auto;scrollbar-width:none}
+.nav-links::-webkit-scrollbar{display:none}
+.nav-links a{display:block;padding:0 14px;height:56px;line-height:56px;font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:.04em;transition:color .2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{color:var(--gold)}
+.nav-links a.active{border-bottom:2px solid var(--gold)}
+
+/* ── HERO ── */
+.hero{text-align:center;padding:4rem 2rem 2.5rem;background:radial-gradient(ellipse 80% 50% at 50% 0%,#1a0f00 0%,var(--dark) 70%);border-bottom:1px solid var(--border)}
+.om{font-family:var(--serif);font-size:2.4rem;color:var(--gold);display:block;margin-bottom:.4rem;opacity:.8}
+.hero h1{font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:400;color:var(--gold);letter-spacing:.04em;margin-bottom:.8rem}
+.hero h1 em{color:var(--gold2);font-style:italic}
+.hero p{font-size:14px;color:var(--muted);max-width:640px;margin:0 auto 1.5rem;line-height:1.8}
+.hero-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.htag{padding:4px 12px;border:1px solid var(--border);border-radius:20px;font-size:10px;color:var(--muted);letter-spacing:.06em}
+
+/* ── MAIN TABS ── */
+.main-tabs{display:flex;flex-wrap:wrap;background:#0a0a0a;border-bottom:1px solid var(--border);padding:0 1.5rem;position:sticky;top:56px;z-index:900}
+.main-tab{padding:0 16px;height:44px;line-height:44px;font-size:11px;letter-spacing:.05em;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:var(--sans);white-space:nowrap;transition:color .2s,border-color .2s}
+.main-tab:hover{color:var(--text)}
+.main-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.page{display:none}.page.active{display:block}
+
+/* ── LAYOUT ── */
+.container{max-width:1200px;margin:0 auto;padding:0 1.5rem}
+.section{padding:2.5rem 0;border-bottom:1px solid var(--border)}
+.section-label{font-size:10px;letter-spacing:.15em;color:var(--gold);text-transform:uppercase;margin-bottom:6px}
+.section-title{font-family:var(--serif);font-size:1.6rem;font-weight:400;color:var(--gold2);margin-bottom:.4rem}
+.section-desc{font-size:13px;color:var(--muted);max-width:580px}
+
+/* ── SEARCH BAR ── */
+.search-wrap{display:flex;gap:.8rem;flex-wrap:wrap;margin:1.5rem 0}
+.search-wrap input,.search-wrap select{background:var(--panel);border:1px solid var(--border);border-radius:4px;color:var(--text);padding:9px 14px;font-family:var(--sans);font-size:13px;outline:none;transition:border-color .2s}
+.search-wrap input{flex:1;min-width:220px}
+.search-wrap input:focus,.search-wrap select:focus{border-color:var(--gold)}
+.search-wrap select{appearance:none;-webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a7065' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 10px center;padding-right:30px}
+
+/* ── RESULTS COUNT ── */
+.results-count{font-size:11px;color:var(--muted);margin-bottom:1rem;letter-spacing:.06em}
+
+/* ── MUDRA GRID ── */
+.mudra-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.8rem}
+.mudra-card{background:var(--card);border:1px solid var(--border);border-radius:6px;padding:1rem 1.2rem;transition:border-color .2s,transform .1s;cursor:default}
+.mudra-card:hover{border-color:var(--gold);transform:translateY(-1px)}
+.mudra-card.hidden{display:none}
+.mudra-name{font-family:var(--serif);font-size:1rem;color:var(--gold);margin-bottom:3px;letter-spacing:.04em}
+.mudra-sanskrit{font-family:'Noto Serif Devanagari',var(--serif);font-size:.9rem;color:var(--gold2);margin-bottom:.4rem;display:block}
+.mudra-meta{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:.5rem}
+.mudra-tag{font-size:10px;padding:2px 8px;border-radius:20px;border:1px solid;letter-spacing:.05em}
+.mt-type{background:rgba(201,168,76,.1);color:var(--gold);border-color:rgba(201,168,76,.25)}
+.mt-deity{background:rgba(107,63,160,.1);color:#a07ae0;border-color:rgba(107,63,160,.25)}
+.mt-chakra{background:rgba(29,158,117,.1);color:var(--teal);border-color:rgba(29,158,117,.25)}
+.mt-element{background:rgba(200,72,32,.1);color:#e06f37;border-color:rgba(200,72,32,.25)}
+.mudra-fingers{font-size:12px;color:var(--text);line-height:1.6;margin-bottom:.4rem}
+.mudra-purpose{font-size:12px;color:var(--muted);line-height:1.6;border-left:2px solid var(--border);padding-left:.7rem}
+.mudra-purpose b{color:var(--gold2)}
+
+/* ── SACRED TEXT CARDS ── */
+.text-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1rem}
+.text-card{background:var(--card);border:1px solid var(--border);border-radius:6px;overflow:hidden;transition:border-color .2s}
+.text-card:hover{border-color:var(--gold)}
+.text-card.hidden{display:none}
+.text-card-head{background:#0a0800;padding:1rem 1.2rem;border-bottom:1px solid var(--border)}
+.text-title{font-family:var(--serif);font-size:1.1rem;color:var(--gold);letter-spacing:.04em;margin-bottom:.3rem}
+.text-source{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.text-card-body{padding:1rem 1.2rem}
+.text-summary{font-size:13px;color:var(--text);line-height:1.8;margin-bottom:.8rem}
+.text-verses{display:flex;flex-direction:column;gap:.5rem;margin-bottom:.8rem}
+.verse-block{background:var(--panel);border-left:2px solid var(--gold);border-radius:0 4px 4px 0;padding:.6rem .9rem}
+.verse-ref{font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:3px}
+.verse-text{font-family:var(--serif);font-size:.9rem;color:var(--gold2);line-height:1.8;margin-bottom:3px}
+.verse-trans{font-size:11px;color:var(--muted);font-style:italic;line-height:1.6}
+.text-links{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.5rem}
+.text-link{font-size:11px;padding:4px 12px;border:1px solid var(--gold);border-radius:20px;color:var(--gold);text-decoration:none;letter-spacing:.04em;transition:background .2s}
+.text-link:hover{background:rgba(201,168,76,.12)}
+.text-pills{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:.6rem}
+.tp{font-size:10px;padding:2px 8px;border-radius:20px;border:1px solid}
+.tp-gold{background:#1a1200;color:var(--gold);border-color:#3a2a00}
+.tp-teal{background:#001a12;color:var(--teal);border-color:#003322}
+.tp-muted{background:var(--panel);color:var(--muted);border-color:var(--border)}
+
+/* ── FILTER PILLS ── */
+.filter-row{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:1.2rem}
+.fpill{padding:5px 14px;border:1px solid var(--border);border-radius:20px;font-size:11px;color:var(--muted);background:none;cursor:pointer;font-family:var(--sans);letter-spacing:.04em;transition:all .2s}
+.fpill:hover{color:var(--text);border-color:var(--muted)}
+.fpill.active{background:var(--gold);color:#000;border-color:var(--gold);font-weight:600}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:var(--panel)}
+::-webkit-scrollbar-thumb{background:#3a3020;border-radius:3px}
+
+footer{text-align:center;padding:2rem;border-top:1px solid var(--border);font-size:12px;color:var(--muted)}
+footer a{color:var(--gold);text-decoration:none}
+
+@media(max-width:600px){
+  .main-tab{padding:0 8px;font-size:10px}
+  .mudra-grid{grid-template-columns:1fr}
+  .text-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://www.culturalmusings.com" class="nav-logo">AESTHETICS OF SOCIETY</a>
+  <ul class="nav-links">
+    <li><a href="https://natyashastra.culturalmusings.com">Natya Shastra</a></li>
+    <li><a href="https://nada-chikitsa.culturalmusings.com">Nada Chikitsa</a></li>
+    <li><a href="raga-kavya.html">🎵 Raga &amp; Kavya</a></li>
+    <li><a href="sacred-reference.html" class="active">🕉️ Sacred Reference</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="om">ॐ</span>
+  <h1>Sacred <em>Reference</em></h1>
+  <p>Searchable database of classical Hasta Mudras, Yoga Mudras, sacred mantras, Rudram, Lalitha Sahasranamavali, Devi Khadgamala and key Vedic stotrams — rooted in Natya Shastra, Agama Shastra and Sri Vidya tradition.</p>
+  <div class="hero-tags">
+    <span class="htag">28 ASAMYUTA HASTAS</span>
+    <span class="htag">23 SAMYUTA HASTAS</span>
+    <span class="htag">YOGA MUDRAS</span>
+    <span class="htag">DEITY MUDRAS</span>
+    <span class="htag">SRI RUDRAM</span>
+    <span class="htag">LALITHA SAHASRANAMAVALI</span>
+    <span class="htag">DEVI KHADGAMALA</span>
+    <span class="htag">VEDIC STOTRAMS</span>
+  </div>
+</section>
+
+<!-- MAIN TABS -->
+<div class="main-tabs" id="mainTabs">
+  <button class="main-tab active" data-page="mudras">🤲 Mudras</button>
+  <button class="main-tab" data-page="mantras">🕉️ Mantras &amp; Stotrams</button>
+</div>
+
+<!-- ═══ PAGE 1: MUDRAS ═══ -->
+<div class="page active" id="page-mudras">
+<section class="section">
+<div class="container">
+  <div class="section-label">Natya Shastra · Abhinaya Darpana · Yoga Shastra</div>
+  <h2 class="section-title">Hasta Mudra Reference</h2>
+  <p class="section-desc">All 28 Asamyuta (single-hand) Hastas, 23 Samyuta (two-hand) Hastas, classical Yoga mudras and Deity mudras. Search by name, deity, purpose, or chakra.</p>
+
+  <div class="search-wrap">
+    <input type="text" id="mudraSearch" placeholder="Search name, deity, chakra, purpose…" oninput="filterMudras()">
+    <select id="mudraTypeFilter" onchange="filterMudras()">
+      <option value="">All Types</option>
+      <option value="Asamyuta">Asamyuta Hasta (single hand)</option>
+      <option value="Samyuta">Samyuta Hasta (both hands)</option>
+      <option value="Yoga">Yoga / Pranayama</option>
+      <option value="Deity">Deity / Puja</option>
+    </select>
+    <select id="mudraDeityFilter" onchange="filterMudras()">
+      <option value="">All Deities</option>
+      <option>Shiva</option><option>Vishnu</option><option>Devi / Shakti</option>
+      <option>Saraswati</option><option>Krishna</option><option>Ganesha</option>
+      <option>Surya</option><option>Universal</option>
+    </select>
+  </div>
+
+  <div class="filter-row" id="mudraFilterRow">
+    <button class="fpill active" data-f="">All</button>
+    <button class="fpill" data-f="Asamyuta">Single Hand</button>
+    <button class="fpill" data-f="Samyuta">Both Hands</button>
+    <button class="fpill" data-f="Yoga">Yoga</button>
+    <button class="fpill" data-f="Deity">Deity</button>
+  </div>
+
+  <div class="results-count" id="mudraCount"></div>
+  <div class="mudra-grid" id="mudraGrid"></div>
+</div>
+</section>
+</div>
+
+<!-- ═══ PAGE 2: MANTRAS & STOTRAMS ═══ -->
+<div class="page" id="page-mantras">
+<section class="section">
+<div class="container">
+  <div class="section-label">Vedic · Agamic · Sri Vidya · Shaiva</div>
+  <h2 class="section-title">Mantras &amp; Sacred Stotrams</h2>
+  <p class="section-desc">Key summaries, selected verses and authoritative external links for Sri Rudram (Namakam + Chamakam), Lalitha Sahasranamavali, Devi Khadgamala, and core Vedic stotrams. Search by deity, tradition, or text name.</p>
+
+  <div class="search-wrap">
+    <input type="text" id="textSearch" placeholder="Search text name, deity, tradition, verse…" oninput="filterTexts()">
+    <select id="textDeityFilter" onchange="filterTexts()">
+      <option value="">All Deities</option>
+      <option>Shiva / Rudra</option><option>Devi / Shakti</option>
+      <option>Vishnu</option><option>Surya</option><option>Universal</option>
+    </select>
+    <select id="textTradFilter" onchange="filterTexts()">
+      <option value="">All Traditions</option>
+      <option>Rigveda</option><option>Yajurveda</option><option>Samaveda</option>
+      <option>Atharvaveda</option><option>Puranic</option><option>Sri Vidya</option>
+    </select>
+  </div>
+
+  <div class="results-count" id="textCount"></div>
+  <div class="text-grid" id="textGrid"></div>
+</div>
+</section>
+</div>
+
+<div style="background:#050505;border-top:1px solid var(--border);padding:.7rem 1.5rem;font-size:11px;color:var(--muted);text-align:center;line-height:1.6">
+  <em style="color:#e06f37">Sacred Practice Notice:</em> These texts and practices are for dharmic learning. Results depend on sincerity of intent and karmic field. They must never be used for negative purposes — misuse invites equivalent karmic consequence. The practitioner accepts full responsibility.
+</div>
+
+<footer>
+  <p>Aesthetics of Society · <a href="https://www.culturalmusings.com">culturalmusings.com</a> · Naredla Rama Chandra</p>
+  <p style="margin-top:5px;font-size:11px">Sacred Reference · Mudras · Mantras · Stotrams · Natya Shastra · Sri Vidya</p>
+</footer>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// TAB SWITCHING
+// ═══════════════════════════════════════════════════════════════
+document.getElementById('mainTabs').addEventListener('click',e=>{
+  const t=e.target.closest('.main-tab');if(!t)return;
+  document.querySelectorAll('.main-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById('page-'+t.dataset.page).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+// ═══════════════════════════════════════════════════════════════
+// DATA — MUDRAS
+// ═══════════════════════════════════════════════════════════════
+const MUDRAS = [
+  // ── ASAMYUTA HASTAS (28 single-hand) ──
+  {name:'Pataka',sanskrit:'पताका',type:'Asamyuta',deity:'Universal',chakra:'Vishuddha',element:'Ether',
+   fingers:'Four fingers extended and joined; thumb bent across the palm.',
+   meanings:'Flag, cloud, forest, river, horse, street, blessing, night, seasons',
+   purpose:'Most fundamental hasta. Used for salutation, representing clouds and sky. Opening gesture in most classical dance sequences. Represents the divine flag of dharma.'},
+  {name:'Tripataka',sanskrit:'त्रिपताका',type:'Asamyuta',deity:'Vishnu',chakra:'Anahata',element:'Air',
+   fingers:'Three fingers (index, middle, ring) extended and joined; little finger raised; thumb bent.',
+   meanings:'Crown, tree, lightning, peacock tail, flame',
+   purpose:'Represents Vishnu\'s crown and the sacred flame. Used in temple rituals when depicting deities. The three fingers symbolise Brahma, Vishnu and Shiva.'},
+  {name:'Ardhapataka',sanskrit:'अर्धपताका',type:'Asamyuta',deity:'Universal',chakra:'Vishuddha',element:'Ether',
+   fingers:'Index and middle fingers extended and separated; ring and little fingers bent; thumb extended.',
+   meanings:'Leaf, scissor, stream, two',
+   purpose:'Represents a leaf or young sprout. Used to indicate number two. Fundamental gesture for nature imagery in Abhinaya.'},
+  {name:'Kartarimukha',sanskrit:'कर्तरीमुख',type:'Asamyuta',deity:'Devi / Shakti',chakra:'Manipura',element:'Fire',
+   fingers:'Index and middle fingers extended and spread like scissors; other fingers and thumb bent.',
+   meanings:'Scissors, separation, eyes of a fish, crooked, controversy',
+   purpose:'Represents Devi\'s sword of discrimination. Symbolises sharp discernment cutting through illusion (maya). Used in depictions of Kali\'s weapons.'},
+  {name:'Mayura',sanskrit:'मयूर',type:'Asamyuta',deity:'Kartikeya / Saraswati',chakra:'Vishuddha',element:'Ether',
+   fingers:'Thumb touches the tip of the index finger; other three fingers extended and spread.',
+   meanings:'Peacock, gentle touch, applying tilak, eyelash, holding a flower',
+   purpose:'Represents the peacock — vehicle of Kartikeya. Used for depicting delicate movements, applying cosmetics, or the grace of Saraswati. The peacock is the symbol of divine beauty.'},
+  {name:'Ardhachandra',sanskrit:'अर्धचन्द्र',type:'Asamyuta',deity:'Shiva / Chandra',chakra:'Ajna',element:'Water',
+   fingers:'Thumb extended, all four fingers extended and joined, forming a half-moon shape.',
+   meanings:'Half moon, waist, prayer, neck, beginning',
+   purpose:'Represents the crescent moon worn by Shiva. Used for holding objects, waist gestures, and indicating beginnings. The half-moon is the symbol of Somanatha.'},
+  {name:'Arala',sanskrit:'अराल',type:'Asamyuta',deity:'Vishnu',chakra:'Anahata',element:'Air',
+   fingers:'Index finger bent (like a hook); all other fingers extended; thumb extended.',
+   meanings:'Drinking nectar, oblation, Achyuta (Vishnu), wind',
+   purpose:'Represents the gesture of drinking nectar (amrita). Associated with Vishnu as Achyuta (the imperishable). Used in depictions of the samudra manthan and nectar offering.'},
+  {name:'Shukatunda',sanskrit:'शुकतुण्ड',type:'Asamyuta',deity:'Universal',chakra:'Manipura',element:'Fire',
+   fingers:'Index finger extended and slightly bent (like a parrot\'s beak); other fingers and thumb bent.',
+   meanings:'Parrot, releasing arrow, disputation, coin',
+   purpose:'Represents the parrot — symbol of perfect repetition of sacred texts (like Valmiki). Used for shooting arrows in epic narratives and temple storytelling.'},
+  {name:'Mushti',sanskrit:'मुष्टि',type:'Asamyuta',deity:'Shiva',chakra:'Muladhara',element:'Earth',
+   fingers:'All four fingers folded into the palm; thumb pressed over the middle and ring fingers.',
+   meanings:'Fist, holding, wrestling, firmness, steadiness',
+   purpose:'Represents Shiva\'s firmness and holding of the universe. Symbol of determination and inner strength. Used in martial postures and when depicting Hanuman and Bhima.'},
+  {name:'Shikhara',sanskrit:'शिखर',type:'Asamyuta',deity:'Shiva',chakra:'Sahasrara',element:'Thought',
+   fingers:'Thumb pointing up; all four fingers folded into a fist.',
+   meanings:'Mountain peak, bow, pole, kiss, Shiva\'s linga',
+   purpose:'Represents the peak of Mount Meru and Shiva\'s cosmic axis. The upward thumb is the Shivalinga. Used in meditative postures and while depicting the cosmic mountain.'},
+  {name:'Kapitha',sanskrit:'कपित्थ',type:'Asamyuta',deity:'Saraswati / Lakshmi',chakra:'Anahata',element:'Air',
+   fingers:'Index finger bent over the thumb; other fingers folded.',
+   meanings:'Holding a flower, cymbals, Lakshmi, Saraswati',
+   purpose:'The gesture of holding delicate objects — a flower, a string instrument, cymbals. Represents Saraswati holding the veena and Lakshmi offering a lotus.'},
+  {name:'Katakamukha',sanskrit:'कटकामुख',type:'Asamyuta',deity:'Vishnu / Krishna',chakra:'Anahata',element:'Air',
+   fingers:'Index finger and thumb form an O-shape; middle finger slightly bent; others extended.',
+   meanings:'String of pearls, flower, drawing bow, graceful grasp',
+   purpose:'The elegant holding gesture — pulling a string of pearls, weaving flowers into a garland, or drawing a bow. Represents Krishna\'s graceful movements. Most used in Abhinaya for beauty and refinement.'},
+  {name:'Suchi',sanskrit:'सूचि',type:'Asamyuta',deity:'Universal',chakra:'Ajna',element:'Light',
+   fingers:'Index finger extended and pointing; all other fingers closed into a fist.',
+   meanings:'Needle, one, addressing someone, the Sun, threat, universe',
+   purpose:'The pointing gesture — indicating direction, number one, the single sun, or a needle. Represents the singular focus of meditation. Used to indicate Brahman as the undivided One.'},
+  {name:'Chandrakala',sanskrit:'चन्द्रकला',type:'Asamyuta',deity:'Shiva / Chandra',chakra:'Ajna',element:'Water',
+   fingers:'Little finger and ring finger extended; middle finger slightly bent; index finger bent; thumb extended.',
+   meanings:'The digit of the moon, crescent in Shiva\'s hair',
+   purpose:'Represents the crescent moon embedded in Shiva\'s matted hair (Jata). Used specifically when depicting Shiva-related themes in dance and when indicating the 16th digit of the moon (Amakala).'},
+  {name:'Padmakosha',sanskrit:'पद्मकोश',type:'Asamyuta',deity:'Lakshmi / Devi',chakra:'Anahata',element:'Air',
+   fingers:'All five fingers spread and slightly curved, like an opening lotus bud.',
+   meanings:'Lotus bud, apple, breast, opening of a flower',
+   purpose:'The most auspicious of all mudras — the lotus bud, home of Lakshmi. Represents purity, beauty emerging from the depths. Used in all offerings to the divine and when depicting Lakshmi arising from the ocean.'},
+  {name:'Sarpashirsha',sanskrit:'सर्पशीर्ष',type:'Asamyuta',deity:'Vishnu / Shesha',chakra:'Svadhisthana',element:'Water',
+   fingers:'All five fingers extended and joined, wrist bent forward so palm faces outward, fingers pointing down.',
+   meanings:'Snake head, water sprinkling, elephant movement, snake',
+   purpose:'Represents the serpent Shesha on whom Vishnu rests. Used for depicting snakes, water sprinkling in ritual, and the undulating movement of an elephant\'s trunk. Essential in Naga worship.'},
+  {name:'Mrigashirsha',sanskrit:'मृगशीर्ष',type:'Asamyuta',deity:'Chandra / Soma',chakra:'Svadhisthana',element:'Water',
+   fingers:'Thumb, middle, and little fingers extended; index and ring fingers bent.',
+   meanings:'Deer head, feminine face, cheek, love',
+   purpose:'Represents the deer — vehicle of Chandra and symbol of the gentle, searching soul. Used for depicting the face of a woman in Shringar rasa and the gentle movement of deer in nature.'},
+  {name:'Kangula',sanskrit:'कङ्गुल',type:'Asamyuta',deity:'Vishnu',chakra:'Anahata',element:'Air',
+   fingers:'Thumb and little finger extended; other three fingers bent.',
+   meanings:'Fruit, bell, bracelet',
+   purpose:'The gesture of holding round fruits or a bell. Represents the bell offered to Vishnu in puja. Used in temple ritual gestures and the offering of fruit (Naivedya).'},
+  {name:'Alapadma',sanskrit:'अलपद्म',type:'Asamyuta',deity:'Lakshmi',chakra:'Anahata',element:'Air',
+   fingers:'All five fingers spread wide apart; wrist turned outward.',
+   meanings:'Fully opened lotus, full moon, beauty',
+   purpose:'The fully bloomed lotus — Lakshmi\'s own mudra. Represents the complete opening of the heart. Used for depicting the full moon, perfect beauty, and the fully awakened heart chakra.'},
+  {name:'Chatura',sanskrit:'चतुर',type:'Asamyuta',deity:'Universal',chakra:'Manipura',element:'Fire',
+   fingers:'Ring finger and little finger extended and joined; index and middle fingers bent; thumb extended.',
+   meanings:'Gold, cleverness, sandalwood, small measure, bee',
+   purpose:'Represents cleverness and fine objects. Used for indicating small quantities, applying sandalwood paste, and the buzzing of a bee. Represents the intelligence that perceives subtle truths.'},
+  {name:'Bhramara',sanskrit:'भ्रमर',type:'Asamyuta',deity:'Krishna',chakra:'Anahata',element:'Air',
+   fingers:'Index finger bent over the thumb; middle finger curved; ring and little fingers extended.',
+   meanings:'Bee, Bhramari (the bee goddess), buzzing',
+   purpose:'Represents the bee — the soul eternally seeking the nectar of Brahman. Associated with Krishna as the dark bee drawn to the lotus of Radha. Also represents Devi Bhramari, the goddess of bees.'},
+  {name:'Hamsasya',sanskrit:'हंसास्य',type:'Asamyuta',deity:'Saraswati',chakra:'Vishuddha',element:'Ether',
+   fingers:'All fingertips touch the tip of the thumb, forming a beak.',
+   meanings:'Swan, applying tilak, delicacy, string instrument playing',
+   purpose:'The swan\'s beak — Saraswati\'s vehicle. Represents supreme delicacy and discrimination (Viveka). Used for playing the veena, applying a tilak, picking flowers. The swan separates milk from water — the symbol of pure discernment.'},
+  {name:'Hamsapaksha',sanskrit:'हंसपक्ष',type:'Asamyuta',deity:'Saraswati',chakra:'Vishuddha',element:'Ether',
+   fingers:'All fingers extended and spread wide like a fan, thumb separately extended.',
+   meanings:'Swan\'s wing, five, five elements',
+   purpose:'The spread wings of Hamsa (swan). Represents Saraswati in flight. Used for the number five, the Pancha Tattvas, and the sweeping wing gesture in classical dance.'},
+  {name:'Sandamsha',sanskrit:'सन्दंश',type:'Asamyuta',deity:'Vishnu',chakra:'Manipura',element:'Fire',
+   fingers:'Thumb and index finger extended and touching at tips; other fingers extended.',
+   meanings:'Pinching, holding a petal, tongs, Sudarshana Chakra',
+   purpose:'The pinching gesture. Represents holding the Sudarshana Chakra of Vishnu between thumb and index. Used for picking flowers, applying sandalwood, and the precise grasp of sacred ritual objects.'},
+  {name:'Mukula',sanskrit:'मुकुल',type:'Asamyuta',deity:'Universal',chakra:'Anahata',element:'Air',
+   fingers:'All five fingertips brought together pointing upward.',
+   meanings:'Bud, eating, offering food, lotus bud',
+   purpose:'The bud gesture — the soul before awakening. Used for offering food (Naivedya) and touching a deity\'s feet. Represents the state just before the lotus opens — the potential for full spiritual blossoming.'},
+  {name:'Tamrachuda',sanskrit:'ताम्रचूड',type:'Asamyuta',deity:'Kartikeya / Skanda',chakra:'Manipura',element:'Fire',
+   fingers:'Index finger pointing upward at an angle; thumb extended; other fingers bent.',
+   meanings:'Cock (rooster), Kartikeya\'s vehicle',
+   purpose:'Represents the rooster — Kartikeya\'s vehicle and the announcer of dawn. Used in temple rituals for Subrahmanya / Skanda and in depicting the victory of the gods over asuras at dawn.'},
+  {name:'Trishula',sanskrit:'त्रिशूल',type:'Asamyuta',deity:'Shiva',chakra:'Ajna',element:'Light',
+   fingers:'Index, middle, and ring fingers extended and spread like three prongs; little finger and thumb bent.',
+   meanings:'Trident of Shiva, three Vedas, Tri-Shakti',
+   purpose:'Shiva\'s cosmic trident piercing the three levels of existence (gross, subtle, causal). The three prongs represent Iccha (will), Jnana (knowledge), and Kriya (action) — the three Shaktis. Essential gesture in all Shaiva rituals.'},
+  {name:'Kataka',sanskrit:'कटक',type:'Asamyuta',deity:'Universal',chakra:'Anahata',element:'Air',
+   fingers:'Index finger and middle finger slightly bent, forming a bracelet shape with the thumb.',
+   meanings:'Bracelet, garland, holding flowers',
+   purpose:'Represents the sacred bracelet (Kangan). Used for holding garlands, stringing flower offerings, and as a graceful feminine gesture. Fundamental in Bharatanatyam for depictions of a woman adorning herself.'},
+
+  // ── SAMYUTA HASTAS (23 two-hand) ──
+  {name:'Anjali',sanskrit:'अञ्जलि',type:'Samyuta',deity:'Universal',chakra:'Anahata',element:'Air',
+   fingers:'Both palms pressed together, fingers pointing upward, held at the heart or above the head.',
+   meanings:'Salutation, prayer, offering, lotus, sun',
+   purpose:'The universal gesture of Namaste — recognising the divine in the other. At the heart = honouring a person. Above the head = honouring God. Used in every form of Vedic worship, opening prayers, and as the first mudra taught to any student.'},
+  {name:'Kapota',sanskrit:'कपोत',type:'Samyuta',deity:'Universal',chakra:'Anahata',element:'Air',
+   fingers:'Both hands in Anjali but with the palms slightly hollowed, thumbs crossing inside.',
+   meanings:'Pigeon, respectful acceptance, receiving blessings',
+   purpose:'The hollow prayer gesture — receiving prasad, blessings, or sacred water. The cupped shape represents the vessel of the heart ready to receive divine grace. Used for offering water (Arghya) in puja.'},
+  {name:'Karkata',sanskrit:'कर्कट',type:'Samyuta',deity:'Shiva',chakra:'Muladhara',element:'Earth',
+   fingers:'Both hands interlocked with fingers of each hand fitting between the others\', fingers curving outward.',
+   meanings:'Crab, interlocking, tree trunk, large group',
+   purpose:'Represents the crab — symbol of the moon\'s house (Cancer / Karka). Used for depicting large tree trunks, interlocked structures, and the cosmic dance of Shiva Nataraja where all creation is woven together.'},
+  {name:'Swastika',sanskrit:'स्वस्तिक',type:'Samyuta',deity:'Vishnu / Ganesha',chakra:'Muladhara',element:'Earth',
+   fingers:'Both wrists crossed at the chest, each hand in Pataka (flat), palms facing forward.',
+   meanings:'Swastika symbol, auspiciousness, crossroads, boundaries',
+   purpose:'The ancient auspicious cross — symbol of Vishnu\'s cosmic axle and Ganesha\'s blessing at beginnings. Used at the start of all rituals and journeys. Represents the four directions and the still point at the center.'},
+  {name:'Dola',sanskrit:'डोला',type:'Samyuta',deity:'Krishna',chakra:'Svadhisthana',element:'Water',
+   fingers:'Both arms hanging naturally at the sides, hands in Pataka, gently swinging.',
+   meanings:'Swing, gentle movement, breeze, standing at ease',
+   purpose:'Represents the divine swing (Jhoola) of Krishna and Radha. The resting posture between movements in classical dance. Associated with Vrindavan and the playful leela of Krishna.'},
+  {name:'Pushpaputa',sanskrit:'पुष्पपुट',type:'Samyuta',deity:'Vishnu / Devi',chakra:'Anahata',element:'Air',
+   fingers:'Both hands cupped and joined, as if holding a handful of flowers.',
+   meanings:'Handful of flowers, offering, vessel for water',
+   purpose:'The flower offering gesture. Used for offering flowers to a deity at the beginning of puja. Represents Pushpanjali — the throwing of flowers at the deity. The hands form a vessel of the heart filled with devotion.'},
+  {name:'Utsanga',sanskrit:'उत्सङ्ग',type:'Samyuta',deity:'Devi / Parvati',chakra:'Anahata',element:'Air',
+   fingers:'Right hand crosses to touch the left upper arm; left hand crosses to touch the right upper arm. An embrace.',
+   meanings:'Embrace, modesty, cold, love',
+   purpose:'The self-embrace — representing Parvati\'s warmth, modesty, and the devotee\'s longing. Used in Shringar rasa (romantic sentiment) and for depicting Karuna (compassion) when a mother holds herself in grief.'},
+  {name:'Shivalinga',sanskrit:'शिवलिङ्ग',type:'Samyuta',deity:'Shiva',chakra:'Muladhara',element:'Earth',
+   fingers:'Left hand horizontal, forming a base (Ardhachandra); right hand vertical with thumb up (Shikhara) resting in the left.',
+   meanings:'Shivalinga, cosmic pillar, the axis mundi',
+   purpose:'The sacred Shivalinga in mudra form. Left hand = Yoni (Shakti / Prakriti). Right hand = Linga (Shiva / Purusha). Their union is the source of all creation. Used exclusively in Shaiva puja and Agamic ritual.'},
+  {name:'Katakavardhana',sanskrit:'कटकवर्धन',type:'Samyuta',deity:'Vishnu / Lakshmi',chakra:'Anahata',element:'Air',
+   fingers:'Both hands in Katakamukha (O-shaped), one above the other, as if crowning.',
+   meanings:'Coronation, marriage, prosperity, Lakshmi',
+   purpose:'The coronation gesture — used when depicting the installation of a king or when Lakshmi crowns Vishnu with garlands. Represents the marriage of heaven and earth, abundance flowing from above.'},
+  {name:'Kartariswastika',sanskrit:'कर्तरीस्वस्तिक',type:'Samyuta',deity:'Devi / Shakti',chakra:'Manipura',element:'Fire',
+   fingers:'Both hands in Kartarimukha (scissor), wrists crossed.',
+   meanings:'Tiger\'s crossing feet, separation, bamboo forest',
+   purpose:'Represents the fierce crossing of Devi\'s swords. Used in depictions of Durga and Kali. Also represents the crossing of bamboo stalks and the sacred forest. The double-scissors energy of Shakti\'s discernment.'},
+  {name:'Shakata',sanskrit:'शकट',type:'Samyuta',deity:'Universal',chakra:'Muladhara',element:'Earth',
+   fingers:'Both fists (Mushti) facing inward with index fingers and little fingers extended, thumbs extended.',
+   meanings:'Demon, cart, Raksha (protective)',
+   purpose:'Used to depict demons and asuras in classical dance. Also the cart (Shakata) that Krishna overturned as an infant. The gesture of protective warding-off in temple iconography.'},
+  {name:'Shankha',sanskrit:'शङ्ख',type:'Samyuta',deity:'Vishnu',chakra:'Vishuddha',element:'Ether',
+   fingers:'Right thumb is grasped by the left hand\'s four fingers; right four fingers extend upward; left thumb extends.',
+   meanings:'Conch shell, Vishnu\'s Panchajanya, sacred sound',
+   purpose:'Vishnu\'s conch shell Panchajanya — the sound that begins all creation and ends all battles. The primordial OM. Used in all Vaishnava ritual, the blowing of the shankha at dawn, and depicting Vishnu\'s Chaturbhuja form.'},
+  {name:'Chakra',sanskrit:'चक्र',type:'Samyuta',deity:'Vishnu',chakra:'Manipura',element:'Fire',
+   fingers:'Index fingers of both hands joined at tips, other fingers interlocked, thumbs extended upward.',
+   meanings:'Disc, wheel, Sudarshana Chakra, cosmic wheel',
+   purpose:'Vishnu\'s Sudarshana Chakra — the spinning disc of pure discrimination and dharmic protection. Represents the wheel of time (Kalachakra) and the cosmic order. Used in Vaishnava dance-drama when Vishnu wields his chakra.'},
+  {name:'Samputa',sanskrit:'सम्पुट',type:'Samyuta',deity:'Ganesha',chakra:'Muladhara',element:'Earth',
+   fingers:'Both hands cupped together forming a closed box shape, like a treasure chest.',
+   meanings:'Closed box, jewel casket, protecting treasure',
+   purpose:'The treasure-box gesture. Represents Ganesha\'s Modaka (sweet treasure). Used for depicting the inner treasure of wisdom, the Atman hidden within the Pranamaya kosha. The heart as a sealed treasury of divine grace.'},
+  {name:'Pasha',sanskrit:'पाश',type:'Samyuta',deity:'Devi / Varuna',chakra:'Svadhisthana',element:'Water',
+   fingers:'Both index fingers hooked and interlocked, other fingers extended.',
+   meanings:'Rope, bond, Maya, Varuna\'s noose',
+   purpose:'The rope of Maya — the cosmic bondage through which the soul experiences duality. Devi\'s Pasha is the rope of divine love that binds the devotee to Her. Varuna\'s noose binds the unrighteous. Used in Sri Vidya ritual.'},
+  {name:'Kilaka',sanskrit:'किलक',type:'Samyuta',deity:'Vishnu / Indra',chakra:'Manipura',element:'Fire',
+   fingers:'Little fingers of both hands interlocked, other fingers extended forward.',
+   meanings:'Tie, binding love between friends, lightning bolt',
+   purpose:'The friendship bond — Indra\'s lightning and Vishnu\'s bolt of grace. Represents the sacred covenant between a deity and devotee. Used when depicting the friendship of Krishna-Arjuna and Indra-Vishnu alliance.'},
+  {name:'Matsya',sanskrit:'मत्स्य',type:'Samyuta',deity:'Vishnu (Matsya Avatar)',chakra:'Svadhisthana',element:'Water',
+   fingers:'Right hand flat (Pataka) on top of left flat hand; right thumb extended as the fin.',
+   meanings:'Fish, Matsya avatar, water',
+   purpose:'Vishnu as Matsya — the first avatar who saved the Vedas from the cosmic flood. Represents the primordial fish and water element. Used when depicting the Dashavataras and cosmic dissolution.'},
+  {name:'Kurma',sanskrit:'कूर्म',type:'Samyuta',deity:'Vishnu (Kurma Avatar)',chakra:'Muladhara',element:'Earth',
+   fingers:'Both hands forming a dome shape, thumbs crossing inside, fingers spread like a turtle shell.',
+   meanings:'Tortoise, stability, foundation, Kurma avatar',
+   purpose:'Vishnu as Kurma supporting Mount Mandara during the churning of the cosmic ocean. Represents absolute stability and the foundational support of the universe. The turtle\'s withdrawal symbolises Pratyahara (sense withdrawal).'},
+  {name:'Varaha',sanskrit:'वराह',type:'Samyuta',deity:'Vishnu (Varaha Avatar)',chakra:'Muladhara',element:'Earth',
+   fingers:'Left hand in Ardhachandra; right hand with all fingers curved downward like a snout.',
+   meanings:'Boar, Varaha avatar, lifting the earth',
+   purpose:'Vishnu as Varaha lifting the earth (Bhudevi) from the cosmic ocean on his tusk. Represents the rescue of the earth principle (stability, grounding) when threatened by chaos. The ultimate gesture of cosmic salvation.'},
+  {name:'Garuda',sanskrit:'गरुड',type:'Samyuta',deity:'Vishnu (Garuda)',chakra:'Vishuddha',element:'Ether',
+   fingers:'Both thumbs interlocked, palms facing outward, fingers spread wide like wings.',
+   meanings:'Eagle, Garuda (Vishnu\'s vehicle), divine flight',
+   purpose:'Vishnu\'s vehicle Garuda — the king of birds and destroyer of serpents (ego). Represents the soul\'s capacity for divine flight through devotion. Used for invoking Garuda\'s protection and Vishnu\'s grace.'},
+  {name:'Nagabandha',sanskrit:'नागबन्ध',type:'Samyuta',deity:'Vishnu / Shesha',chakra:'Svadhisthana',element:'Water',
+   fingers:'Both arms crossed at the wrists, hands in Sarpashirsha (snake-head).',
+   meanings:'Serpents entwined, Shesha Naga, cosmic axis',
+   purpose:'The entwined serpents of Shesha on whom Vishnu rests. Represents the Kundalini Shakti as two entwined nadis (Ida and Pingala). Used when depicting Vishnu\'s cosmic sleep (Yoga Nidra) and the snake Ananta.'},
+  {name:'Khatwa',sanskrit:'खट्वा',type:'Samyuta',deity:'Shiva',chakra:'Sahasrara',element:'Thought',
+   fingers:'Both hands in Mushti (fist), index fingers extended and joined at tips pointing upward.',
+   meanings:'Khatwa (Shiva\'s trident-bed), Brahma\'s skull, cot',
+   purpose:'Represents Shiva\'s trident-bed and the Brahma-kapala (skull) in his hand. The upward-pointing fingers represent transcendence of death. Used in Shaiva Agama ritual for invoking Shiva\'s mastery over Mrityu (death).'},
+  {name:'Bherunda',sanskrit:'भेरुण्ड',type:'Samyuta',deity:'Devi (Bherunda)',chakra:'Ajna',element:'Light',
+   fingers:'Both hands in Hamsapaksha (fan), wrists crossed, fingers pointing outward in both directions.',
+   meanings:'Two-headed bird, fearsome power, Bherunda Devi',
+   purpose:'Represents the mythical two-headed Bherunda bird and the fierce form of Devi as Bherunda. Used in Shakta ritual for invoking the extreme form of protective divine power. Rare — used only in advanced Agamic contexts.'},
+
+  // ── YOGA MUDRAS ──
+  {name:'Jnana / Chin',sanskrit:'ज्ञान / चिन्मुद्रा',type:'Yoga',deity:'Universal / Saraswati',chakra:'Ajna',element:'Light',
+   fingers:'Index finger touches the tip of the thumb; other three fingers extended. Right hand resting on knee facing down (Jnana) or up (Chin).',
+   meanings:'Cosmic knowledge, Atman-Brahman unity',
+   purpose:'The most fundamental of all yoga mudras. The circle formed by index and thumb represents Jivatman (individual self) merging with Paramatman (cosmic Self). Facing down = receiving; facing up = transmitting. Used in deep meditation and dhyana.'},
+  {name:'Dhyana',sanskrit:'ध्यान',type:'Yoga',deity:'Vishnu / Universal',chakra:'Ajna',element:'Light',
+   fingers:'Both hands resting in the lap, right on left, thumbs touching and forming an oval.',
+   meanings:'Meditation, Buddha mudra, deep absorption',
+   purpose:'The meditation posture mudra used by Vishnu in Yoga Nidra and the Buddha in deep Samadhi. The oval of the thumbs represents the egg of creation — Brahmanda. Used in all forms of seated meditation and Yoga Nidra practice.'},
+  {name:'Anjali (Yoga)',sanskrit:'अञ्जलि',type:'Yoga',deity:'Universal',chakra:'Anahata',element:'Air',
+   fingers:'Same as Namaste — both palms pressed at heart center.',
+   meanings:'Prayer, recognition of the divine, heart salutation',
+   purpose:'In yoga, Anjali at the heart activates Anahata chakra. Used at the beginning and end of yoga practice to set sacred intention. Represents the union of the solar (right) and lunar (left) energies.'},
+  {name:'Surya / Agni',sanskrit:'सूर्यमुद्रा',type:'Yoga',deity:'Surya',chakra:'Manipura',element:'Fire',
+   fingers:'Ring finger bent and pressed under the thumb; other fingers extended.',
+   meanings:'Solar energy, digestion, transformation, fire element',
+   purpose:'Activates the fire (Agni) element and the Manipura chakra. Generates heat in the body, stimulates digestion and metabolism. Used in solar practices (Surya Namaskar seated meditation) and for overcoming cold and lethargy.'},
+  {name:'Vayu',sanskrit:'वायुमुद्रा',type:'Yoga',deity:'Universal',chakra:'Anahata',element:'Air',
+   fingers:'Index finger bent and pressed under the thumb; other fingers extended.',
+   meanings:'Air element, Vata balance, Prana regulation',
+   purpose:'Calms excess Vata (air/wind dosha). Relieves joint pain, bloating, and anxiety. Balances Prana Vayu. Used in seated pranayama when the mind is scattered and for grounding excess mental activity.'},
+  {name:'Prithvi',sanskrit:'पृथ्वीमुद्रा',type:'Yoga',deity:'Universal',chakra:'Muladhara',element:'Earth',
+   fingers:'Ring finger touches the tip of the thumb; other fingers extended.',
+   meanings:'Earth element, grounding, nourishment, stability',
+   purpose:'Activates the earth element and Muladhara chakra. Promotes stability, grounding, and physical vitality. Used when feeling ungrounded, fearful, or depleted. Stimulates the sense of smell (Gandha — earth\'s tanmatra).'},
+  {name:'Jala / Varuna',sanskrit:'जलमुद्रा',type:'Yoga',deity:'Varuna',chakra:'Svadhisthana',element:'Water',
+   fingers:'Little finger touches the tip of the thumb; other fingers extended.',
+   meanings:'Water element, hydration, fluid balance',
+   purpose:'Activates the water element and Svadhisthana chakra. Treats dryness of skin, dehydration, and cramps. Balances Kapha. Used for emotional fluidity and when the creative flow feels blocked.'},
+  {name:'Shunya',sanskrit:'शून्यमुद्रा',type:'Yoga',deity:'Universal',chakra:'Vishuddha',element:'Ether',
+   fingers:'Middle finger bent and pressed under the thumb; other fingers extended.',
+   meanings:'Space element, emptiness, hearing',
+   purpose:'Activates the space (Akasha) element and Vishuddha chakra. Said to relieve ear problems and tinnitus. Used in meditation for entering the state of Shunya (void) — the pure awareness before thought arises.'},
+  {name:'Prana',sanskrit:'प्राणमुद्रा',type:'Yoga',deity:'Universal',chakra:'Muladhara',element:'Earth',
+   fingers:'Ring finger and little finger touch the tip of the thumb; index and middle fingers extended.',
+   meanings:'Life force activation, vitality, Prana Vayu',
+   purpose:'The master mudra for activating life force (Prana). Improves vision, energises the body, and boosts immunity. Used at dawn for infusing the day with vital energy. Balances all five Pranas when combined with Nadi Shodhana pranayama.'},
+  {name:'Apana',sanskrit:'अपानमुद्रा',type:'Yoga',deity:'Universal',chakra:'Muladhara',element:'Earth',
+   fingers:'Middle finger and ring finger touch the tip of the thumb; index and little fingers extended.',
+   meanings:'Downward energy, elimination, purification',
+   purpose:'Activates Apana Vayu — the downward-moving life force of elimination and purification. Used for digestive issues, detoxification, and grounding practices. Essential in Shatkarma (yogic cleansing) and for expelling negative energies.'},
+  {name:'Hakini',sanskrit:'हाकिनी',type:'Yoga',deity:'Saraswati / Ajna',chakra:'Ajna',element:'Light',
+   fingers:'Both hands facing each other, all five fingertips of each hand touching corresponding fingertips.',
+   meanings:'Third eye activation, memory, concentration',
+   purpose:'Activates the Ajna (third eye) chakra and both hemispheres of the brain simultaneously. Improves memory and concentration. Used before study, before chanting, and in advanced meditation. The Ajna lotus\'s ruling deity is Hakini Shakti.'},
+
+  // ── DEITY MUDRAS ──
+  {name:'Abhaya',sanskrit:'अभयमुद्रा',type:'Deity',deity:'Universal (all deities)',chakra:'Vishuddha',element:'Ether',
+   fingers:'Right hand raised, palm facing outward, fingers pointing up and together.',
+   meanings:'Protection, fearlessness, "fear not", divine assurance',
+   purpose:'Given by virtually every deity — Shiva, Vishnu, Devi, Ganesha, Buddha. The supreme gesture of divine protection. "I am here; be without fear." The primary iconographic mudra in all temple sculpture. When the practitioner makes this gesture, they invoke divine protection.'},
+  {name:'Varada',sanskrit:'वरदमुद्रा',type:'Deity',deity:'Universal (all deities)',chakra:'Anahata',element:'Air',
+   fingers:'Right (or left) hand extended downward, palm facing outward, fingers pointing down.',
+   meanings:'Boon-granting, giving, generosity, bestowing grace',
+   purpose:'The boon-granting gesture of every deity. Paired with Abhaya to indicate complete divine grace: "I protect you AND I give you all you need." Represents the downward flow of divine grace into the material world. Lakshmi\'s primary mudra.'},
+  {name:'Tarjani',sanskrit:'तर्जनीमुद्रा',type:'Deity',deity:'Devi (Kali) / Shiva',chakra:'Manipura',element:'Fire',
+   fingers:'Index finger extended and slightly curved, pointing forward or upward; other fingers folded.',
+   meanings:'Warning, warding off, fierce protection, admonition',
+   purpose:'The warning gesture of Kali and Shiva in their fierce (Ugra) aspects. Used to ward off evil forces, break spells, and command demons. In puja, used to invoke the fierce protective aspect of the deity before the benign aspect.'},
+  {name:'Vyakhyana',sanskrit:'व्याख्यानमुद्रा',type:'Deity',deity:'Vishnu / Brahma / Dakshinamurti',chakra:'Vishuddha',element:'Ether',
+   fingers:'Index finger touches the thumb in a circle; other fingers extended, palm forward.',
+   meanings:'Teaching, explanation, cosmic discourse, Guru mudra',
+   purpose:'The teaching gesture of Dakshinamurti (Shiva as the silent teacher), Vishnu as cosmic guru, and Brahma at creation. Used when a deity explains cosmic truth. In yoga, the guru assumes this gesture while teaching. Activates the Vishuddha (truth-speaking) centre.'},
+  {name:'Gada / Khadga',sanskrit:'गदामुद्रा',type:'Deity',deity:'Vishnu / Devi',chakra:'Manipura',element:'Fire',
+   fingers:'Fist closed tightly, as if gripping a weapon.',
+   meanings:'Mace (gada), sword, strength, divine weapon',
+   purpose:'Vishnu holds his Kaumodaki mace; Devi holds her sword for the annihilation of ignorance. Represents the divine power to destroy obstacles. Used in warrior stances (Vira Bhava) and in Shastra Puja (weapon worship) on Navami during Navratri.'},
+  {name:'Padma (Deity)',sanskrit:'पद्ममुद्रा',type:'Deity',deity:'Lakshmi / Brahma',chakra:'Anahata',element:'Air',
+   fingers:'Both hands in Alapadma (full open lotus), joined at the wrists, fingers spread wide.',
+   meanings:'Lotus throne, purity, divine seat, Brahma and Lakshmi',
+   purpose:'Brahma sits on the lotus; Lakshmi holds lotuses. The joined lotus-hands form the divine seat (Padmasana) from which creation emerges. Used in all auspicious rituals, Mangalacharana (auspicious openings), and offerings to Lakshmi.'},
+  {name:'Yoga (Deity)',sanskrit:'योगमुद्रा',type:'Deity',deity:'Vishnu / Shiva',chakra:'Muladhara',element:'Earth',
+   fingers:'Both hands in the lap, right on left, thumbs touching — identical to Dhyana mudra.',
+   meanings:'Cosmic meditation, Yoga Nidra, universal absorption',
+   purpose:'Vishnu in Yoga Nidra on the cosmic ocean; Shiva in eternal Samadhi on Kailash. Represents the universe when the active, creative phase has dissolved back into the infinite ground of being. The deepest state of divine rest from which a new creation will emerge.'}
+];
+
+// ═══════════════════════════════════════════════════════════════
+// DATA — SACRED TEXTS
+// ═══════════════════════════════════════════════════════════════
+const SACRED_TEXTS = [
+  {
+    title:'Sri Rudram — Namakam',
+    source:'Yajurveda (Krishna) · Chapter 16 · Taittiriya Samhita',
+    deity:'Shiva / Rudra',
+    tradition:'Yajurveda',
+    pills:['11 Anuvakas','Shaiva','Vedic','Shatarudriya'],
+    summary:'The Namakam is the first of the two-part Sri Rudram. It is a direct salutation to Rudra in 11 anuvakas (sections), naming him in all his 108 cosmic aspects — from the fierce archer to the gentle healer, from the dweller in forests to the lord of markets. Each anuvaka begins with "Namas te Rudra..." Each of the 11 Rudras presides over one of the 11 life forces (Pranas). The Namakam ends each anuvaka with the word "Namas" — hence its name.',
+    verses:[
+      {ref:'Anuvaka 1 — Opening',text:'Namaste Rudramanyava uto ta iṣave namaḥ | Namaste astu dhanvane bāhubhyāmuta te namaḥ',trans:"Salutation to your fury O Rudra and to your arrow. Salutation to your bow and to both your arms."},
+      {ref:'Anuvaka 4 — Rudra in Nature',text:'Ye te sahasramayutaṃ pāśā mṛtyo martyāya hantave | Tān yajñasya māyayā sarvānava yajāmahe',trans:"The thousands and ten-thousands of your snares, O Mrityu, which are spread for mortals to slay — by the power of this sacrifice we release all."},
+      {ref:'Anuvaka 8 — Namo Bhavaya',text:'Namo bhavāya cha rudrāya cha | Namaḥ śarvāya cha paśupataye cha',trans:"Salutations to the Being and the Weeping One; salutations to the Destroyer and the Lord of creatures."},
+      {ref:'Anuvaka 11 — Closing (Maha Namakam)',text:'Tryambakam yajāmahe sugandhiṃ puṣṭivardhanam | Urvārukamiva bandhanānmṛtyormukṣīya māmṛtāt',trans:"We worship the three-eyed one, fragrant and nourishing — may he liberate me from death as a ripe cucumber from its vine, not from immortality."}
+    ],
+    links:[
+      {label:'Full Text — shlokam.org',url:'https://shlokam.org/shloka/rudram-namakam.htm'},
+      {label:'Vedic Heritage Portal',url:'https://vedicheritage.gov.in'},
+      {label:'Medha Journal Analysis',url:'https://www.medhajournal.com/rudram-chamakam-an-original-explanation/'},
+      {label:'Sanskrit Documents',url:'https://sanskritdocuments.org'}
+    ]
+  },
+  {
+    title:'Sri Rudram — Chamakam',
+    source:'Yajurveda (Krishna) · Chapter 18 · Taittiriya Samhita',
+    deity:'Shiva / Rudra',
+    tradition:'Yajurveda',
+    pills:['11 Anuvakas','22 Wishes','Shaiva','Vedic'],
+    summary:'The Chamakam ("and grant me this") is the second part of the Sri Rudram. After the Namakam salutes Rudra, the Chamakam petitions him for 22 specific boons in 11 anuvakas. Each verse ends with "cha me" — "and this too for me." The 22 wishes range from vitality, prosperity, and progeny to wisdom, liberation, and cosmic identity. The entire universe — material and spiritual — is listed as desired. Each of the 22 boons corresponds to one of the 22 shrutis of the octave.',
+    verses:[
+      {ref:'Anuvaka 1 — 22 Wishes begin',text:'Śham cha me mayaścha me priyam cha me\'nukāmaścha me kāmaścha me saumanasaścha me',trans:"Grant me peace and happiness; grant me the dear and the desirable; grant me desire and goodwill."},
+      {ref:'Anuvaka 4 — Material wishes',text:'Vittam cha me vittaścha me bhūtam cha me bhūtiścha me vastuścha me vāsuścha me',trans:"Grant me wealth and its acquisition; existence and flourishing; dwelling and its Lord."},
+      {ref:'Anuvaka 7 — Cosmic identity',text:'Agnīṣomāviha gāvau mā hiṃsiṣṭam | Ṛtasyāham putrāṇāṃ pituḥ pitrāṇāmupanamo\'ham',trans:"O Agni-Soma, do not harm the cows here. I bow to the father of the sons of Rita (Cosmic Order)."},
+      {ref:'Anuvaka 11 — Final verses',text:'Sahasram cha me ayutam cha me niyutam cha me nyarbudam cha me samudraścha me',trans:"Grant me a thousand, ten thousand, a hundred thousand, a billion — and the ocean itself."}
+    ],
+    links:[
+      {label:'Full Text — shlokam.org',url:'https://shlokam.org/shloka/rudram-chamakam.htm'},
+      {label:'Vedic Heritage Portal',url:'https://vedicheritage.gov.in'},
+      {label:'Medha Journal Analysis',url:'https://www.medhajournal.com/rudram-chamakam-an-original-explanation/'},
+      {label:'Wisdom Library',url:'https://www.wisdomlib.org'}
+    ]
+  },
+  {
+    title:'Lalitha Sahasranamavali',
+    source:'Brahmanda Purana · Lalitopakhyana · Chapter 185–189',
+    deity:'Devi / Shakti',
+    tradition:'Puranic',
+    pills:['1000 Names','Sri Vidya','Tantra','Devi'],
+    summary:'The Lalitha Sahasranamavali is the thousand names of Sri Lalitha Tripura Sundari, revealed by Hayagriva (Vishnu) to the sage Agastya. Each name is a self-complete mantra describing one aspect of the Goddess. The 1000 names are organised in a grand cosmic order: Her physical description (1–50), Her powers (51–200), Her manifestations (201–400), Sri Chakra correspondences (401–600), philosophical aspects (601–800), liberation aspects (801–1000). The text is the crown jewel of Sri Vidya Tantra.',
+    verses:[
+      {ref:'Names 1–5 — Opening salutation',text:'Śrī Mātā · Śrī Mahārājñī · Śrīmat-Siṃhāsaneśvarī · Cidagnikuṇḍa-saṃbhūtā · Devakārya-samudyatā',trans:"The Auspicious Mother · The Great Queen · Enthroned on Sri Simhasana · Born from the fire of consciousness · Arising to fulfill the work of the gods."},
+      {ref:'Names 183–185 — Chakra aspects',text:'Mūlādhārāmbujārūḍhā · Ṣaṭcakropari-saṃsthitā · Mahāśaktiḥ',trans:"Seated on the lotus of Muladhara · Residing above all six chakras · The Great Shakti herself."},
+      {ref:'Names 727–730 — Liberation',text:'Sacchidānanda-rūpiṇī · Deśa-kāla-paricchinnā · Sarvagā · Sarvamohini',trans:"She whose form is Existence-Consciousness-Bliss · Unlimited by space and time · All-pervading · She who enchants all."},
+      {ref:'Names 999–1000 — Final',text:'Durlabhā · Durgamā · Durgā · Sarvāyudha-dharā · Anekabāhu-vikaraṇī · Anekāsya-vikaraṇī',trans:"The Rare One · The Difficult to Attain · Durga herself · Bearing all weapons · With many arms · With many faces."}
+    ],
+    links:[
+      {label:'Full Text — shlokam.org',url:'https://shlokam.org/shloka/lalitha-sahasranamam.htm'},
+      {label:'ManBlunder — Sri Vidya Commentary',url:'https://manblunder.com'},
+      {label:'Sanskrit Documents',url:'https://sanskritdocuments.org'},
+      {label:'Wisdom Library',url:'https://www.wisdomlib.org'}
+    ]
+  },
+  {
+    title:'Devi Khadgamala Stotram',
+    source:'Sri Vidya Tradition · Linked to Brahmanda Purana · Sri Chakra Upasana',
+    deity:'Devi / Shakti',
+    tradition:'Sri Vidya',
+    pills:['Sri Chakra','Sri Vidya','Shakta','Tantric'],
+    summary:'The Devi Khadgamala ("the garland of the Goddess\'s sword") is the complete invocation sequence of all the deities residing in the Sri Chakra — from the outer squares to the innermost Bindu. Chanting it is equivalent to performing a complete Sri Chakra puja. It begins with the Panchadashi mantra in seed form, invokes all 64 yoginis of the outer chakras, the 8 Matrikas, the 10 Mahavidyas, the Tripur aspects, and ends at Lalitha Parabhattarika at the Bindu. Considered the most potent of all Devi stotrams.',
+    verses:[
+      {ref:'Opening — Panchadashi seed',text:'Aim Hrīm Śrīm | Oṃ Ka Ae Ī La Hrīm | Ha Sa Ka Ha La Hrīm | Sa Ka La Hrīm',trans:"The three beejakshara of the Devi (Aim = Saraswati, Hreem = Mahamaya, Shreem = Lakshmi). The Panchadashi mantra in three lines. This IS Lalitha herself in sound."},
+      {ref:'Outer squares — Trailokya Mohana Chakra',text:'Animā Laghimā Garimā Mahimā Īśitva Vaśitva Prākāmya Bhuktā Icchā Prāptiḥ',trans:"The ten Siddhis (powers): Anima (reducing to atomic size), Laghima (weightlessness), Garima (heaviness), Mahima (expanding to cosmic size), Ishitva (lordship), Vashitva (control), Prakamya (wish-fulfillment), Bhukta (enjoyment), Iccha (will), Prapti (attainment)."},
+      {ref:'Inner triangle — Sarvasiddhi prada',text:'Kāmeśvarī Bhagamālinī Nityaklinnā Bheruṇḍā Vahnivasinī Mahāvajreśvarī Śivadūtī Tvaritā',trans:"The eight Nitya Devis of the inner triangle: Kamesvari (the desiring one), Bhagamalini (the garland of fortune), Nityaklinna (the ever-moist), Bherunda (the fearsome), Vahnivasini (fire-dweller), Mahavajresvari (diamond power), Sivaduti (Shiva's envoy), Tvarita (the swift)."},
+      {ref:'Bindu — Final invocation',text:'Mahā Tripura Sundarī · Mahādevī · Mahābhairavī · Mahāparābhattārikā',trans:"The Great Beauty of Three Cities · The Great Goddess · The Great Bhairavi · The Supreme Imperial Goddess. The point of all points. The source of all sources."}
+    ],
+    links:[
+      {label:'Wikipedia — Khadgamala',url:'https://en.wikipedia.org/wiki/Khadgamala'},
+      {label:'ManBlunder — Sri Vidya',url:'https://manblunder.com'},
+      {label:'Vedadhara — Mantra Shastra',url:'https://www.vedadhara.com/english-topics-mantra-shastra'},
+      {label:'Sanskrit Documents',url:'https://sanskritdocuments.org'}
+    ]
+  },
+  {
+    title:'Purusha Sukta',
+    source:'Rigveda 10.90 · Also Yajurveda 31 · Samaveda · Atharvaveda 19.6',
+    deity:'Vishnu / Universal',
+    tradition:'Rigveda',
+    pills:['16 Verses','Pan-Vedic','Cosmogony','Vaishnava'],
+    summary:'The Purusha Sukta is one of the most ancient and important hymns of the Rigveda — present in all four Vedas. It describes the cosmic Purusha (Supreme Person) as the source of all creation. The universe itself is the body of the Purusha. The 16 verses describe the cosmic sacrifice (Yajnya) through which the Purusha\'s body becomes the four Vedas, four castes, the sun, moon, fire, air, sky, and earth. It is the earliest description of Vishnu as the universal self and is central to all Vaishnava philosophy.',
+    verses:[
+      {ref:'Verse 1 — The cosmic being',text:'Sahasraśīrṣā Puruṣaḥ sahasrākṣaḥ sahasrapāt | Sa bhūmiṃ viśvato vṛtvā atyatiṣṭhad daśāṅgulam',trans:"The Purusha has a thousand heads, a thousand eyes, a thousand feet. He envelopes the earth on all sides and stands ten fingers\' breadth beyond."},
+      {ref:'Verse 3 — His extent',text:'Pādosya viśvā bhūtāni tripādasyāmṛtaṃ divi | Tripādūrdhva udait Puruṣaḥ pādosyehābhavat punaḥ',trans:"A quarter of him is all these beings; three quarters of him is immortal in heaven. Three quarters the Purusha ascended above, while one quarter remained here."},
+      {ref:'Verse 12 — From the sacrifice',text:'Chandramā manaso jātaḥ cakṣoḥ sūryo ajāyata | Mukhādindraścāgniśca prāṇādvāyurajāyata',trans:"From his mind the Moon was born; from his eye the Sun arose; from his mouth Indra and Agni; from his breath Vayu arose."},
+      {ref:'Verse 16 — The cosmic Yajna',text:'Yajñena yajñamayajanta devāḥ tāni dharmāṇi prathamānyāsan | Te ha nākaṃ mahimānaḥ sacante yatra pūrve sādhyāḥ santi devāḥ',trans:"With the sacrifice the gods sacrificed the sacrifice. These were the first ordinances. Those great ones attain heaven where the former Sadhyas and gods dwell."}
+    ],
+    links:[
+      {label:'Vedic Heritage Portal',url:'https://vedicheritage.gov.in'},
+      {label:'Wisdom Library',url:'https://www.wisdomlib.org'},
+      {label:'Sanskrit Documents',url:'https://sanskritdocuments.org'},
+      {label:'Veda Purana',url:'https://vedapurana.org'}
+    ]
+  },
+  {
+    title:'Devi Suktam (Vak Ambhrini)',
+    source:'Rigveda 10.125 · 8 Verses',
+    deity:'Devi / Shakti',
+    tradition:'Rigveda',
+    pills:['8 Verses','Shakta','Feminine Divine','Oldest Devi Hymn'],
+    summary:'The Devi Suktam (also called the Vak Suktam) is the earliest extant hymn to the Goddess in human history. It is spoken in the first person by Vak Ambhrini — the daughter of sage Ambhrina — who identifies herself completely with the cosmic creative power (Shakti). In 8 verses she says "I am" — I move with the Rudras, I sustain all the gods, I am the one the wise men praise, I am the sovereign queen. This text is the direct ancestor of all Shakta philosophy and the Sri Vidya tradition.',
+    verses:[
+      {ref:'Verse 1 — "I move with all gods"',text:'Ahaṃ rudrebhir vasubhiścarāmy ahaṃ ādityair uta viśvadevaiḥ | Ahaṃ mitrāvaruṇobhā bibharmy ahaṃ indrāgnī ahaṃ aśvinobhā',trans:"I move with the Rudras and the Vasus; I move with the Adityas and the Vishve Devas. I sustain both Mitra and Varuna; I sustain Indra and Agni, and both the Ashwins."},
+      {ref:'Verse 3 — "I am the sovereign queen"',text:'Ahaṃ rāṣṭrī saṃgamanī vasūnāṃ cikituṣī prathamā yajñiyānām | Tāmadevā vyadadhuḥ purutra bhuriṣṭhātrāṃ bhūrāveśayantī',trans:"I am the sovereign queen, the gatherer of treasures, the foremost of those worthy of worship. The gods have distributed me many-sided, dwelling in many places."},
+      {ref:'Verse 5 — "I give birth to the Father"',text:'Ahaṃ suve pitaram asya mūrdhanaṃ mama yonirapsvantaḥ samudre | Tato vi tiṣṭhe bhuvanānu viśvotāmūṃ dyāṃ varṣmaṇopa spṛśāmi',trans:"I give birth to the Father at the crown of this world. My source is in the waters of the ocean. From there I spread through all the worlds and touch that heaven with my summit."},
+      {ref:'Verse 8 — "I alone exist"',text:'Ahaṃ eva vāta iva pra vāmy ārabhamāṇā bhuvanāni viśvā | Paro divā para enā pṛthivyaitāvatī mahimā saṃbabhūva',trans:"I alone blow like the wind, setting all worlds in motion. Beyond heaven, beyond this earth — such is my greatness that I have become."}
+    ],
+    links:[
+      {label:'Vedic Heritage Portal',url:'https://vedicheritage.gov.in'},
+      {label:'Wisdom Library',url:'https://www.wisdomlib.org'},
+      {label:'Sanskrit Documents',url:'https://sanskritdocuments.org'},
+      {label:'Vedadhara',url:'https://www.vedadhara.com/english-topics-mantra-shastra'}
+    ]
+  },
+  {
+    title:'Gayatri Mantra',
+    source:'Rigveda 3.62.10 · Vishvamitra · Also in Yajurveda & Samaveda',
+    deity:'Surya / Universal',
+    tradition:'Rigveda',
+    pills:['24 Syllables','Pan-Vedic','Savitri','Most Recited'],
+    summary:'The Gayatri Mantra is the most recited Vedic verse in human history — chanted by hundreds of millions daily for over 3,500 years. Composed in the Gayatri metre (8×3 = 24 syllables), it is addressed to Savitri — the creative, life-giving aspect of the sun. It asks the divine light (Bhargo) to illuminate our intellect (Dhiyo yo nah prachodayat). The mantra corresponds to three worlds (Bhur/earth, Bhuvah/atmosphere, Svah/heaven) and three planes of consciousness. It is the essence of all Vedic knowledge in one verse.',
+    verses:[
+      {ref:'The complete mantra',text:'OM Bhūr bhuvaḥ svaḥ | Tat savitur vareṇyaṃ | Bhargo devasya dhīmahi | Dhiyo yo naḥ prachodayāt',trans:"OM. Earth, atmosphere, heaven. We meditate upon that most adorable, most desirable and most worship-able light (Bharga) of the divine sun (Savitri). May that divine light inspire and illuminate our intellect."},
+      {ref:'Word-by-word',text:'Tat = That (the Absolute) · Savituḥ = of Savitri (the Sun) · Vareṇyam = the most adorable · Bhargaḥ = radiance/purifying light · Devasya = of the Divine · Dhīmahi = we meditate upon',trans:"Every word is a complete mantra. Bhargo specifically means the purifying radiance that burns away sin — not just light but transforming fire."},
+      {ref:'The 24 syllables & Vedas',text:'The 24 syllables correspond to: 8 Vasus (Rigveda), 11 Rudras (Yajurveda), 12 Adityas (Samaveda), and the 3 Prajapatis. This is why it is found in all 4 Vedas.',trans:"The Gayatri encodes the entire Vedic cosmos in 24 syllables — one for each hour of the day, one for each fortnight of the lunar calendar."}
+    ],
+    links:[
+      {label:'Vedic Heritage Portal',url:'https://vedicheritage.gov.in'},
+      {label:'Wisdom Library',url:'https://www.wisdomlib.org'},
+      {label:'Sanskrit Documents',url:'https://sanskritdocuments.org'},
+      {label:'Vedadhara',url:'https://www.vedadhara.com/english-topics-mantra-shastra'}
+    ]
+  },
+  {
+    title:'Vishnu Sahasranama',
+    source:'Mahabharata · Anushasana Parva · 149th Chapter · Bhishma to Yudhishthira',
+    deity:'Vishnu',
+    tradition:'Puranic',
+    pills:['1000 Names','Vaishnava','Mahabharata','Bhishma'],
+    summary:'The Vishnu Sahasranama is the thousand names of Vishnu as narrated by Bhishma from his deathbed of arrows to Yudhishthira, on the instruction of Krishna himself. Each name is a concentrated description of one of Vishnu\'s infinite qualities. The names move from cosmic descriptions (Vishvam — the universe itself) through preservation, liberation, and the nature of the Self. Adi Shankaracharya wrote a famous commentary proving that all 1000 names equally describe Shiva. Chanted daily, it is the most practised Vaishnava stotram.',
+    verses:[
+      {ref:'Names 1–5',text:'Viśvaṃ Viṣṇurvāṣaṭkāro bhūtabhavyabhavatprabhuḥ | Bhūtakṛd bhūtabhṛd bhāvo bhūtātmā bhūtabhāvanaḥ',trans:"Vishvam (the Universe itself), Vishnu (all-pervading), Vashatkar (the sacrificial call), Lord of past-present-future, Creator of beings, Sustainer, the existence itself, the Self of all, the nourisher."},
+      {ref:'Names 83–85',text:'Suvarṇavarṇo hemāṅgo varāṅgaścandrāṅgadī | Vīrāhā viṣamaḥ śūnyo ghṛtāśīracalaścalaḥ',trans:"Golden-coloured, golden-limbed, beautiful-limbed, bearing moon-armlets, slayer of heroes, the unequal, the void itself, feeding on ghee, the immovable and the moveable."},
+      {ref:'Phala Shruti — Result of chanting',text:'Nāmāni sahasraṃ viṣṇostu sarvāṇi | Śṛṇvataḥ phalametat syāt paṭhataśca dvijottama',trans:"These thousand names of Vishnu — he who hears them or recites them, O best of twice-born, shall obtain this result: all obstacles are removed, wishes fulfilled, liberation attained."}
+    ],
+    links:[
+      {label:'Wisdom Library',url:'https://www.wisdomlib.org'},
+      {label:'Sanskrit Documents',url:'https://sanskritdocuments.org'},
+      {label:'Veda Purana',url:'https://vedapurana.org'},
+      {label:'Vedadhara',url:'https://www.vedadhara.com/english-topics-mantra-shastra'}
+    ]
+  },
+  {
+    title:'Ganapati Atharvashirsha',
+    source:'Atharvaveda Upanishad · Atharva tradition',
+    deity:'Ganesha',
+    tradition:'Atharvaveda',
+    pills:['Upanishad','Ganesha','Pre-puja','Universal'],
+    summary:'The Ganapati Atharvashirsha is the Upanishad dedicated entirely to Ganesha. It is the single most authoritative text establishing Ganesha as the Supreme Being (not just a god but the Brahman itself). In this text, Ganesha declares: "I am Brahma, I am Vishnu, I am Rudra, I am Indra, I am all the gods." It establishes GAM as Ganesha\'s beejakshara, the Ganesha Gayatri, and the complete philosophical identity of Ganesha with the Absolute. Recited before all pujas, before all mantras, before any sacred undertaking.',
+    verses:[
+      {ref:'Ganesha\'s self-declaration',text:'Tvaṃ Brahmastvam Viṣṇustvaṃ Rudrastvaṃ Indrastvaṃ Agnistvam Vāyustvam Sūryastvaṃ Candramāstvam',trans:"You are Brahma. You are Vishnu. You are Rudra. You are Indra. You are Agni. You are Vayu. You are the Sun. You are the Moon. You are all the divine powers."},
+      {ref:'The Beejakshara',text:'Gaṇādi-pūrvam ukāram || Bindu samyuktam || Nityaṃ dhyāyanti yoginaḥ || Kāmadaṃ mokṣadaṃ caiva || Oṃkārasya parabrahmaṇe || Gam iti bījaṃ',trans:"The letter Ga, united with Om and the anusvara (GAM) — this bija is eternally meditated upon by the yogis. It gives all desired objects and liberation. GAM is the beejakshara of Ganesha."},
+      {ref:'Ganesha Gayatri',text:'Oṃ Ekadantāya vidmahe Vakratuṇḍāya dhīmahi | Tanno Dantiḥ pracodayāt',trans:"OM — we know the single-tusked one. We meditate on the curved-trunk one. May that elephant-toothed one inspire and illuminate us."}
+    ],
+    links:[
+      {label:'Sanskrit Documents',url:'https://sanskritdocuments.org'},
+      {label:'Wisdom Library',url:'https://www.wisdomlib.org'},
+      {label:'Vedadhara',url:'https://www.vedadhara.com/english-topics-mantra-shastra'},
+      {label:'Veda Purana',url:'https://vedapurana.org'}
+    ]
+  }
+];
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER MUDRAS
+// ═══════════════════════════════════════════════════════════════
+function renderMudras(list){
+  const grid=document.getElementById('mudraGrid');
+  grid.innerHTML=list.map(m=>`
+<div class="mudra-card" data-type="${m.type}" data-deity="${m.deity}">
+  <div class="mudra-name">${m.name}</div>
+  <span class="mudra-sanskrit">${m.sanskrit}</span>
+  <div class="mudra-meta">
+    <span class="mudra-tag mt-type">${m.type}</span>
+    <span class="mudra-tag mt-deity">${m.deity}</span>
+    <span class="mudra-tag mt-chakra">${m.chakra}</span>
+    <span class="mudra-tag mt-element">${m.element}</span>
+  </div>
+  <div class="mudra-fingers"><b style="color:var(--gold2)">Formation:</b> ${m.fingers}</div>
+  ${m.meanings?`<div class="mudra-fingers" style="margin:.3rem 0"><b style="color:var(--gold2)">Meanings:</b> ${m.meanings}</div>`:''}
+  <div class="mudra-purpose">${m.purpose}</div>
+</div>`).join('');
+  document.getElementById('mudraCount').textContent=`Showing ${list.length} of ${MUDRAS.length} mudras`;
+}
+
+function filterMudras(){
+  const q=document.getElementById('mudraSearch').value.toLowerCase();
+  const type=document.getElementById('mudraTypeFilter').value;
+  const deity=document.getElementById('mudraDeityFilter').value;
+  const active=document.querySelector('.fpill.active')?.dataset.f||'';
+  const filtered=MUDRAS.filter(m=>{
+    const ft=type||active;
+    if(ft&&m.type!==ft)return false;
+    if(deity&&m.deity!==deity)return false;
+    if(q){
+      const blob=(m.name+m.sanskrit+m.deity+m.chakra+m.purpose+m.fingers+(m.meanings||'')).toLowerCase();
+      if(!blob.includes(q))return false;
+    }
+    return true;
+  });
+  renderMudras(filtered);
+}
+
+// Filter pills
+document.getElementById('mudraFilterRow').addEventListener('click',e=>{
+  const p=e.target.closest('.fpill');if(!p)return;
+  document.querySelectorAll('.fpill').forEach(x=>x.classList.remove('active'));
+  p.classList.add('active');
+  document.getElementById('mudraTypeFilter').value=p.dataset.f;
+  filterMudras();
+});
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER TEXTS
+// ═══════════════════════════════════════════════════════════════
+function renderTexts(list){
+  const grid=document.getElementById('textGrid');
+  grid.innerHTML=list.map(t=>`
+<div class="text-card">
+  <div class="text-card-head">
+    <div class="text-title">${t.title}</div>
+    <div class="text-source">${t.source}</div>
+  </div>
+  <div class="text-card-body">
+    <div class="text-pills">
+      ${t.pills.map(p=>`<span class="tp tp-gold">${p}</span>`).join('')}
+      <span class="tp tp-teal">${t.deity}</span>
+      <span class="tp tp-muted">${t.tradition}</span>
+    </div>
+    <div class="text-summary">${t.summary}</div>
+    <div class="text-verses">
+      ${t.verses.map(v=>`
+<div class="verse-block">
+  <div class="verse-ref">${v.ref}</div>
+  <div class="verse-text">${v.text}</div>
+  <div class="verse-trans">${v.trans}</div>
+</div>`).join('')}
+    </div>
+    <div class="text-links">
+      ${t.links.map(l=>`<a href="${l.url}" target="_blank" class="text-link">↗ ${l.label}</a>`).join('')}
+    </div>
+  </div>
+</div>`).join('');
+  document.getElementById('textCount').textContent=`Showing ${list.length} of ${SACRED_TEXTS.length} texts`;
+}
+
+function filterTexts(){
+  const q=document.getElementById('textSearch').value.toLowerCase();
+  const deity=document.getElementById('textDeityFilter').value;
+  const trad=document.getElementById('textTradFilter').value;
+  const filtered=SACRED_TEXTS.filter(t=>{
+    if(deity&&!t.deity.includes(deity.split('/')[0].trim()))return false;
+    if(trad&&t.tradition!==trad)return false;
+    if(q){
+      const blob=(t.title+t.source+t.deity+t.tradition+t.summary+t.pills.join('')+t.verses.map(v=>v.text+v.trans+v.ref).join('')).toLowerCase();
+      if(!blob.includes(q))return false;
+    }
+    return true;
+  });
+  renderTexts(filtered);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+renderMudras(MUDRAS);
+renderTexts(SACRED_TEXTS);
+</script>
+</body>
+</html>
